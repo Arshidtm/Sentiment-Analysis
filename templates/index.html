@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Sentiment Analysis</title>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <style>
+        body {
+            background-color: #343a40; /* Dark background */
+            color: white; /* Light text for contrast */
+            padding-top: 50px; /* Add some top padding */
+            text-align: center; /* Center content */
+        }
+
+        .container {
+            max-width: 600px; /* Reduce container width */
+            margin: 0 auto; /* Center the container horizontally */
+        }
+
+        #review_text {
+            height: 100px; /* Reduced text box height */
+        }
+    </style>
+    <script>
+        function clearForm() {
+            document.querySelector('textarea[name="review_text"]').value='';
+            document.getElementById('prediction').innerText = ''; 
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>Sentiment Analysis</h1>
+        <p class="lead">Enter your text review below to determine its sentiment.</p>
+
+        <form method="POST" action='/'>
+            <div class="form-group">
+                <label for="review_text">Review Text:</label>
+                <textarea class="form-control" id="review_text" name="review_text" rows="4" placeholder="Write your review here..."></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Analyze Sentiment</button>
+            <button type='button' onclick='clearForm()'>Clear</button>
+
+        </form>
+
+        {% if prediction_txt %}
+            <p id='prediction'><strong>Sentiment:</strong> {{ prediction_txt }}</p>
+        {% endif %}
+    </div>
+
+    <!-- Bootstrap JS (Optional) -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
